@@ -1,44 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Thank You for Your Purchase!</title>
+  <meta charset="UTF-8">
+  <title>Thank You for Your Purchase</title>
   <style>
     body {
       background: #0b0c10;
       color: white;
       font-family: sans-serif;
       text-align: center;
-      padding: 4rem;
+      padding: 3rem;
     }
-    .link-box {
-      background: #1f2833;
-      border-radius: 1rem;
-      padding: 2rem;
-      max-width: 400px;
-      margin: 2rem auto;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
     }
-    a {
-      display: inline-block;
-      margin-top: 1rem;
-      padding: 10px 25px;
-      background: #45a29e;
-      color: white;
-      border-radius: 8px;
+
+    .download-links {
+      margin-top: 2rem;
+    }
+
+    a.download-link {
+      display: block;
+      color: #45a29e;
+      font-size: 1.2rem;
+      margin: 10px auto;
       text-decoration: none;
-      font-weight: bold;
+      border: 2px solid #45a29e;
+      padding: 10px 20px;
+      border-radius: 8px;
+      width: fit-content;
+      transition: background 0.3s;
     }
-    a:hover {
-      background: #66fcf1;
+
+    a.download-link:hover {
+      background: #45a29e;
+      color: #0b0c10;
     }
   </style>
 </head>
 <body>
-  <h1>Thank you for your purchase! 🎉</h1>
-  <div class="link-box">
-    <p>Here is your product link:</p>
-    <a href="https://yourproductlink.com" target="_blank" rel="noopener noreferrer">Access Your Product</a>
-  </div>
+  <h1>Thank you for your purchase!</h1>
+  <p id="message">Loading your product link...</p>
+
+  <div class="download-links" id="downloadLinks"></div>
+
+  <script>
+    // Product download links
+    const productLinks = {
+      cologne: ['https://cnfans.com/product?id=883370739055&platform=ALI_1688'],
+      clothes: ['https://shop1838951640.v.weidian.com/?userid=1838951640&spider_token=459f'],
+      electronics: ['https://shop227764523.v.weidian.com/?userid=227764523&wfr=BuyercopyURL&share_relation=69007436aefef77a_1768994987_1&spider_token=5bae'],
+      bundle: [
+        'https://cnfans.com/product?id=883370739055&platform=ALI_1688',
+        'https://shop1838951640.v.weidian.com/?userid=1838951640&spider_token=459f',
+        'https://shop227764523.v.weidian.com/?userid=227764523&wfr=BuyercopyURL&share_relation=69007436aefef77a_1768994987_1&spider_token=5bae'
+      ]
+    };
+
+    // Get 'product' from query string
+    const urlParams = new URLSearchParams(window.location.search);
+    const product = urlParams.get('product');
+
+    const messageEl = document.getElementById('message');
+    const linksEl = document.getElementById('downloadLinks');
+
+    if (product && productLinks[product]) {
+      messageEl.innerHTML = `Here is your link for <strong>${product}</strong>:`;
+
+      productLinks[product].forEach((link, index) => {
+        const a = document.createElement('a');
+        a.href = link;
+        a.textContent = `Open Product Link ${product === 'bundle' ? index + 1 : ''}`;
+        a.className = 'download-link';
+        a.target = '_blank';
+        a.rel = 'noopener noreferrer';
+        linksEl.appendChild(a);
+      });
+
+    } else {
+      messageEl.textContent = 'Sorry, we could not find your product link. Please contact support.';
+    }
+  </script>
 </body>
 </html>
