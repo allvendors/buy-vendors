@@ -1,0 +1,47 @@
+body {
+  margin: 0;
+  font-family: sans-serif;
+  background: #0b0c10;
+  color: white;
+  overflow-x: hidden;
+}
+
+.container {
+  text-align: center;
+  padding: 4rem;
+}
+
+.product {
+  margin: 2rem auto;
+  padding: 1.5rem;
+  background: #1f2833;
+  border-radius: 1rem;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+  max-width: 400px;
+}
+
+.btn {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 10px 25px;
+  background: #45a29e;
+  color: #fff;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.btn:hover {
+  background: #66fcf1;
+  transform: scale(1.05);
+}
+
+/* Snowflake canvas */
+#snow {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: -1;
+}
